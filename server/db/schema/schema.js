@@ -23,6 +23,5 @@ const progressSchema = new mongoose.Schema({
   }
 });
 
-const Lesson = mongoose.model('Lesson', progressSchema);
+export const progressModel = mongoose.model('Lesson', progressSchema);
 
-module.exports = Lesson;
