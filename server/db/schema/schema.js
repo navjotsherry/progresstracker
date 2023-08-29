@@ -2,8 +2,7 @@ import mongoose from "mongoose";
 
 const progressSchema = new mongoose.Schema({
   Lesson: {
-    type: String,
-    required: true
+    type: String
   },
   githubPush: {
     type: Boolean,
@@ -19,6 +18,14 @@ const progressSchema = new mongoose.Schema({
   },
   date: {
     type: String,
+    required: true
+  },
+  linkedInPost: {
+    type:Boolean,
+    required:true
+  },
+  points: {
+    type: Number,
     required: true
   }
 });

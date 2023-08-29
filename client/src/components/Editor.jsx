@@ -1,13 +1,15 @@
 import { useState,useEffect } from "react"
 import axios from "axios";
 
-const Editor = ({date}) =>{
+const Editor = ({date,setIdDate}) =>{
     const [taskValue, setTaskValue] = useState({
         "Lesson" : "",
         "Github": false,
         "DSA":false,
         "JobApplication":false,
-        "date":date
+        "linkedInPost":false,
+        "date":date,
+        "points" : 0
     })
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,18 +17,20 @@ const Editor = ({date}) =>{
         console.log(taskValue)
         const responseData = await axios.post(`http://localhost:5000/${date}`,taskValue)
         console.log(responseData)
+        setIdDate(null)
     }
 
     useEffect(() => {
         setTaskValue({...taskValue, "date":date})
-        axios.get(`http://localhost:5000/${date}`)
+        axios.get(`http://localhost:5000/one/${date}`)
         .then(response => {
-            const {Lesson,githubPush,applicationtoJob, DSA} = response.data
+            const {Lesson,githubPush,applicationtoJob, DSA,linkedInPost,points} = response.data
             setTaskValue({
                 "Lesson" : Lesson,
                 "Github": githubPush,
                 "DSA":DSA,
                 "JobApplication":applicationtoJob,
+                "linkedInPost":linkedInPost,
                 "date":date
             });
             setLoading(false);
@@ -63,6 +67,12 @@ const Editor = ({date}) =>{
                     <h6>DSA: </h6>
                     <input className="mx-4" checked={taskValue.DSA} onChange={()=>{
                         setTaskValue({...taskValue, "DSA":!taskValue.DSA})
+                    }} type="checkbox" />
+                </div>
+                <div className="flex m-6 p-4 border rounded-xl border-solid border-gray-600 w-80 items-center">
+                    <h6>LinkedIn Post: </h6>
+                    <input className="mx-4" checked={taskValue.linkedInPost} onChange={()=>{
+                        setTaskValue({...taskValue, "linkedInPost":!taskValue.linkedInPost})
                     }} type="checkbox" />
                 </div>
                 <div className="flex m-6 p-4 border rounded-xl border-solid border-gray-600 w-80 items-center">
