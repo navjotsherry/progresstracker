@@ -18,7 +18,8 @@ const progressSchema = new mongoose.Schema({
   },
   date: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   linkedInPost: {
     type:Boolean,
