@@ -31,5 +31,5 @@ const progressSchema = new mongoose.Schema({
   }
 });
 
-export const progressModel = mongoose.model('Lesson', progressSchema);
+export const progressModel = mongoose.model('progressFactors', progressSchema);
 

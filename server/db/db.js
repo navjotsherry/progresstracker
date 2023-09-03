@@ -16,9 +16,5 @@ const dbConnection =()=> {
     })
 
 }
-// dbConnection.then(()=>{
-//     console.log("Database Connected")
-
-// })
 
 export default dbConnection

@@ -4,10 +4,13 @@ import axios from 'axios'
 
 const Dashboard = ()=>{
     const [allCards,setAllCards] = useState([])
+    const [user, SetUser] = useState(localStorage.getItem("user"))
     useEffect(()=>{
         axios.get('http://localhost:5000/getAll')
         .then((e)=>setAllCards(e.data))
     },[])
+
+    if(!user)
     
     if(!allCards) return "Loading..."
 
