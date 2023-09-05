@@ -10,7 +10,7 @@ const Dashboard = ()=>{
         .then((e)=>setAllCards(e.data))
     },[])
 
-    if(!user)
+    if(!user) 
     
     if(!allCards) return "Loading..."
 
