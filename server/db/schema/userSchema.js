@@ -35,7 +35,6 @@ user.statics.signUp = async function (email,password) {
 
 
     const exists = await this.findOne({email})
-    console.log("From statics.signup", typeof email, typeof password)
 
     if(exists){
         throw Error("Email already exists")
