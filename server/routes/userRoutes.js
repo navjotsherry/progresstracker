@@ -1,12 +1,14 @@
-import express from 'express'
-import { loginController, signUpController } from '../controllers/userControllers.js'
+import express from 'express';
 
+// Import login and signup controller functions
+import { loginController, signUpController } from '../controllers/userControllers.js';
 
-const router = express.Router()
+// Create an Express router instance
+const router = express.Router();
 
+// Define routes for user authentication
+router.post('/login', loginController); // Route for user login
+router.post('/signup', signUpController); // Route for user signup
 
-router.post('/login', loginController)
-
-router.post('/signup', signUpController)
-
-export default router
+// Export the router for use in the application
+export default router;

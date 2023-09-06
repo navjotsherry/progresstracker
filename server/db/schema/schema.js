@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Define a schema for tracking progress factors
 const progressSchema = new mongoose.Schema({
   Lesson: {
     type: String
@@ -31,5 +32,5 @@ const progressSchema = new mongoose.Schema({
   }
 });
 
+// Create a model based on the defined schema
 export const progressModel = mongoose.model('progressFactors', progressSchema);
-
