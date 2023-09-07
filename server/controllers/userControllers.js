@@ -8,8 +8,17 @@ const createToken = (_id) => {
 }
 
 // Controller for user login (placeholder response)
-export const loginController = (req, res) => {
-    res.json({user:"Logged In"})
+export const loginController = async (req, res) => {
+    const {email, password } = req.body
+    try {
+        const user = await userModel.logIn(email,password)
+        const token = createToken(user._id)
+        res.json({email,token})
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+    
+    
 }
 
 // Controller for user registration (sign-up)

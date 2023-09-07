@@ -52,5 +52,31 @@ user.statics.signUp = async function (email,password) {
     return user
 }
 
+//Login Function
+user.statics.logIn = async function (email,password){
+    //Validation if both the fields are filled
+    if(!email || !password){
+        throw Error("Please enter email and password")
+    }
+
+    //Finding the user in database using email
+    const user = await this.findOne({email})
+
+    //Checking if user exists already and asking to signup if user does not exist
+    if(!user){
+        throw Error("Please Signup First")
+    }
+
+    //Comparing the stored password hash in database to the provided password using bcrypt
+    const match = await bcrypt.compare(password,user.password)
+
+    //Giving error if the password does not match and logging in if it does
+    if(!match){
+        throw Error("Please enter valid password")
+    }else{
+        return user
+    }
+}
+
 // Create a user model based on the defined schema
 export const userModel = mongoose.model('userModel',user)
