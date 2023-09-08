@@ -31,8 +31,6 @@ export const postProgressController = async (req, res) => {
   
     try {
       let dateProgressData = await progressModel.findOne({ date });
-      console.log("returned dateProgressData : ", dateProgressData)
-      console.log(req.body)
   
       if (!dateProgressData) {
         dateProgressData = new progressModel({
