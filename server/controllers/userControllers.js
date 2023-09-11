@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 // Function to create a JSON Web Token (JWT) with the user's _id
 const createToken = (_id) => {
     // Sign the _id using the JWT_SECRET from environment variables with a 2-hour expiration time
-    return jwt.sign({_id}, process.env.JWT_SECRET ,{expiresIn:"2h"})
+    return jwt.sign({_id}, process.env.JWT_SECRET ,{expiresIn:"1d"})
 }
 
 // Controller for user login (placeholder response)

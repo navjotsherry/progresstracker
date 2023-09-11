@@ -1,32 +1,36 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import { useLogin } from "../hooks/useLogin";
 // Component for user login
 const Login = () => {
     // Define state variables for email and password
+    const {user} = useAuthContext()
+    const navigate = useNavigate() 
+    useEffect(()=>{
+        if(user) navigate('/')
+    },[user])
+    
+    
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const {loginController,loading,error} = useLogin()
 
-    // Get the dispatch function from the authentication context
-    const { dispatch } = useAuthContext();
+    
 
     // Function to handle user login
     const login = async () => {
-        try {
-            // Send a POST request to the server to authenticate the user
-            const response = await axios.post('http://localhost:5000/user/login', { email, password });
-
-            // Dispatch a login action to update the user's authentication status
-            dispatch({ type: 'LOGIN', payload: response.data });
-        } catch (error) {
-            console.log(error.response.data);
-        }
+        loginController(email,password)
+        navigate('/')
     }
 
+    if(loading) return <h1>Loading...</h1>
+
     return (
+        
         <div className="flex flex-col items-center my-5 justify-center space-y-6">
+            {error}
             <div className="flex flex-col w-6/12">
                 <label>Please enter your registered Email:</label>
                 <input

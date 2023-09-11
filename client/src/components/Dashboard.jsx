@@ -1,10 +1,19 @@
 import { useEffect, useState } from 'react'
 import DashboardCard from './DashboardCards.jsx'
 import axios from 'axios'
+import { useAuthContext } from '../hooks/useAuthContext.js'
+import { useNavigate } from 'react-router-dom'
+
 
 const Dashboard = ()=>{
+    const {user} = useAuthContext()
+    const navigate = useNavigate('/login')
     const [allCards,setAllCards] = useState([])
     useEffect(()=>{
+        if(!user) navigate('/login')
+    },[user])
+    useEffect(()=>{
+        
         axios.get('http://localhost:5000/getAll')
         .then((e)=>setAllCards(e.data))
     },[])

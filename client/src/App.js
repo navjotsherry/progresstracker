@@ -6,7 +6,6 @@ import Signup from './components/Signup';
 
 function App() {
   // Initialize the authentication context
-  useAuthContext();
 
   return (
     <div>
@@ -15,10 +14,10 @@ function App() {
         {/* Define route configuration */}
         <Routes>
           {/* Define a route for the dashboard component */}
-          <Route path='/dashboard' element={<Home />} />
+          <Route path='/' element={<Home />} />
 
           {/* Define a catch-all route for the login component */}
-          <Route path='/*' element={<Login />} />
+          <Route path='/login' element={<Login />} />
 
           {/* Define a route for the signup component */}
           <Route path='/signup' element={<Signup />} />
